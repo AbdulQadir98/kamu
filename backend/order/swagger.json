@@ -1,0 +1,229 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Swagger Documentation",
+        "version": "1.0.0",
+        "title": "Orders API",
+        "contact": {
+            "email": "abc@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:8083",
+    "basePath": "/api",
+    "paths" : {
+        "/orders" : {
+            "get" : {
+                "summary" : "Get all the orders",
+                "description": "Get all the orders",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "user_id",
+                        "description": "order of user",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/orderResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Place an order",
+                "description": "Place an order",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "order object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "type": "object",
+                                "$ref": "#/definitions/Order"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/orderResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/{id}" : {
+            "get" : {
+                "summary" : "Get Order",
+                "description": "Get Order",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "order id that needs to be fetched",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/orderResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete the order",
+                "description": "Delete the order",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "order id that needs to be deleted",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/orderResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }
+    }, 
+    "definitions": {
+        "orderResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                     "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "items": {
+                    "type": "object"
+                }
+            }
+        },
+        "item": {
+            "type": "object",
+            "properties": {
+                "id": {
+                     "type": "integer"
+                },
+                "unit": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Order": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/item"
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

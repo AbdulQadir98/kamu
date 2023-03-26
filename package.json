@@ -1,0 +1,31 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "<img width=\"351\" alt=\"kamu arcitecture\" src=\"https://user-images.githubusercontent.com/62184074/205997674-dc1019b5-5364-455a-b559-670421d5eaa0.PNG\">",
+  "main": "index.js",
+  "scripts": {
+    "home": "cd frontend/kamu-home && npm start",
+    "products": "cd frontend/kamu-products && npm start",
+    "cart": "cd frontend/kamu-cart && npm start",
+    "userservice": "cd backend/users && node server.js",
+    "productservice": "cd backend/products && node server.js",
+    "orderservice": "cd backend/order && node server.js",
+    "frontend": "concurrently \"npm run home\" \"npm run products\" \"npm run cart\" ",
+    "backend": "concurrently \"npm run userservice\" \"npm run productservice\" \"npm run orderservice\" ",
+    "cypress": "cd frontend/kamu-home && npm run cypress" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SyscoCorporation/abdul_vilcassim_labs_eag_kamu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SyscoCorporation/abdul_vilcassim_labs_eag_kamu/issues"
+  },
+  "homepage": "https://github.com/SyscoCorporation/abdul_vilcassim_labs_eag_kamu#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
